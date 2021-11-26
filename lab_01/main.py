@@ -127,6 +127,7 @@ def genereate_player_info():
         status = choice(PLAYER_STATUS)
         hours_all = randint(0, 100)
         email = faker.unique.ascii_email()
+        age = randint(10, 70)
         is_admin = faker.boolean(chance_of_getting_true = 50)
 
         friend_id = i + 1
@@ -136,7 +137,7 @@ def genereate_player_info():
  
         friends_list.remove(friend_id)
 
-        line = "{0};{1};{2};{3};{4};{5};{6}\n".format(nickname, password, status, hours_all, email, is_admin, friend_id)
+        line = "{0};{1};{2};{3};{4};{5};{6};{7}\n".format(nickname, password, status, hours_all, email, age, is_admin, friend_id)
 
         f.write(line)
 

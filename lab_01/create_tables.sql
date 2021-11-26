@@ -1,13 +1,6 @@
 CREATE TABLE if not exists Server
 (
-    id          serial PRIMARY KEY,
-    name        varchar(255),
-    owner       varchar(255),
-    ip          varchar(16),
-    max_players serial,
-    version     varchar(8),
-    create_date varchar(16)
-);
+c
 
 
 CREATE TABLE if not exists World 
@@ -29,8 +22,9 @@ CREATE TABLE if not exists Player
     status    varchar(20),
     hours_all serial,
     email     varchar(100) UNIQUE,
+    age       int,
     is_admin  bool,
-    friend_id serial references Player(id)
+    friend_id serial
 );
 
 

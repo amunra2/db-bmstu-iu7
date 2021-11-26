@@ -1,4 +1,4 @@
-COPY Player(nickname, password, status, hours_all, email, is_admin, friend_id) from '/home/amunra23/studying/sem5/bd/db_bmstu/lab_01/player_info.csv' delimiter ';';
+COPY Player(nickname, password, status, hours_all, email, age, is_admin, friend_id) from '/home/amunra23/studying/sem5/bd/db_bmstu/lab_01/player_info.csv' delimiter ';';
 
 COPY World(name, type, mode, seed, cheats_allowed) from '/home/amunra23/studying/sem5/bd/db_bmstu/lab_01/world_info.csv' delimiter ';';
 

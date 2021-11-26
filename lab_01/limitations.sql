@@ -25,10 +25,12 @@ ALTER COLUMN password SET NOT NULL,
 ALTER COLUMN status SET NOT NULL,
 ALTER COLUMN hours_all SET NOT NULL,
 ALTER COLUMN email SET NOT NULL,
+ALTER COLUMN age SET NOT NULL,
 ALTER COLUMN is_admin SET NOT NULL,
--- ADD FOREIGN KEY (is_admin) REFERENCES Player(id),
+ADD FOREIGN KEY (friend_id) REFERENCES Player(id),
 ADD check (nickname != ''),
 ADD check (email != ''),
+ADD check (age >= 10 and age <= 70),
 ADD check (hours_all >= 0 and hours_all <= 100);
 
 
