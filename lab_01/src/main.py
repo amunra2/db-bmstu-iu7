@@ -1,18 +1,19 @@
 from faker import Faker
 from random import choice, randint
-
 import psycopg2
 
+from config import DB_NAME, DB_HOST, DB_USER, DB_PWD
 
-SERVER_FILE = "server_info.csv"
-PLAYER_FILE = "player_info.csv"
-WORLD_FILE = "world_info.csv"
-WEBSITE_FILE = "website_info.csv"
 
-CREATE_SQL = "create_tables.sql"
-DROP_SQL = "drop_tables.sql"
-COPY_SQL = "copy_tables.sql"
-LIMITATIONS_SQL = "limitations.sql"
+SERVER_FILE = "./data/server_info.csv"
+PLAYER_FILE = "./data/player_info.csv"
+WORLD_FILE = "./data/world_info.csv"
+WEBSITE_FILE = "./data/website_info.csv"
+
+CREATE_SQL = "./sql/create_tables.sql"
+DROP_SQL = "./sql/drop_tables.sql"
+COPY_SQL = "./sql/copy_tables.sql"
+LIMITATIONS_SQL = "./sql/limitations.sql"
 
 AMOUNT = 1000
 
@@ -27,7 +28,7 @@ class DataBase:
     def __init__(self):
 
         try:
-            self.__connection = psycopg2.connect(host = 'localhost', user = 'postgres', password = 'postgres', database = 'db_labs')
+            self.__connection = psycopg2.connect(host = DB_HOST, user = DB_USER, password = DB_PWD, database = DB_NAME)
 
             self.__connection.autocommit = True
             self.__cursor = self.__connection.cursor()

@@ -1,6 +1,13 @@
 CREATE TABLE if not exists Server
 (
-c
+    id          serial PRIMARY KEY,
+    name        varchar(255),
+    owner       varchar(255),
+    ip          varchar(16),
+    max_players serial,
+    version     varchar(8),
+    create_date varchar(16)
+);
 
 
 CREATE TABLE if not exists World 
