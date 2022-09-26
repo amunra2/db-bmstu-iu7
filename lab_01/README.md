@@ -37,7 +37,7 @@ pip install -r requirements.txt
 
 3. Создать базу данных (советую использовать для работы [DBeaveer](https://dbeaver.io/), [pgAdmin4](https://www.pgadmin.org/), [DataGrip](https://www.jetbrains.com/ru-ru/datagrip/) (бесплатный по студенческой подписке)), заполнив [конфигурационный файл](./src/config.py) Вашими данными.
 
-2. Запустить
+4. Запустить
    
 ```bash
 python3 main.py
