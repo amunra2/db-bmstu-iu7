@@ -4,14 +4,14 @@
 \t -- формат вывода: unaligned
 \a -- режим вывода только кортежей: включён
 
-\o world.json -- перенаправление вывода
+\o data\world.json -- перенаправление вывода
 select row_to_json(W) from World as W;
 
-\o player.json
+\o data\player.json
 select row_to_json(P) from Player as P;
 
-\o server.json
+\o data\server.json
 select row_to_json(S) from Server as S;
 
-\o website.json
+\o data\website.json
 select row_to_json(W) from Website as W;

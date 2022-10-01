@@ -23,7 +23,7 @@ create temp table json_table
 );
 
 
-copy json_table from '/home/amunra23/studying/sem5/bd/db_bmstu/lab_05/world.json';
+copy json_table from 'data/world.json';
 
 
 insert into world_json(id, name, type, mode, seed, cheats_allowed)

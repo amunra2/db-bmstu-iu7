@@ -1,44 +1,23 @@
 from faker import Faker
-from random import choice, randint
-
 import psycopg2
+import config
 
-
-SERVER_FILE = "server_info.csv"
-PLAYER_FILE = "player_info.csv"
-WORLD_FILE = "world_info.csv"
-WEBSITE_FILE = "website_info.csv"
-
-CREATE_SQL = "create_tables.sql"
-DROP_SQL = "drop_tables.sql"
-COPY_SQL = "copy_tables.sql"
-LIMITATIONS_SQL = "limitations.sql"
-
-AMOUNT = 1000
-
-WORLD_MODE = ["survival", "creative", "hardcore", "spectator", "adventure"]
-WORLD_TYPE = ["default", "superflat", "single biome", "large biomes", "caves"]
-PLAYER_STATUS = ["player", "owner", "premiuim", "moder", "vip"]
-
+SQL_DIR = "./sql/"
 
 
 class DataBase:
-    
     def __init__(self):
-
         try:
-            self.__connection = psycopg2.connect(host = 'localhost', user = 'postgres', password = 'postgres', database = 'db_labs')
+            self.__connection = psycopg2.connect(host = config.DB_HOST, user = config.DB_USER, password = config.DB_PWD, database = config.DB_PWD)
 
             self.__connection.autocommit = True
             self.__cursor = self.__connection.cursor()
 
             print("\nPostgreSQL: Connection opened\n")
-
         except Exception as error:
             print("\nError ocured while init. Exception: ", error)
 
     def __del__(self):
-
         if self.__connection:
             self.__cursor.close()
             self.__connection.close()
@@ -78,52 +57,40 @@ class DataBase:
                 print(notice)
 
             print("\n\nSuccess")
-
         except Exception as error:
             print("\nError ocured while executing. Exception: ", error)
     
     def query_scalar(self):
-        
-        self.execute_query("1_query_scalar.sql")
+        self.execute_query(SQL_DIR + "1_query_scalar.sql")
 
     def query_multi_join(self):
-        
-        self.execute_query("2_query_multi_join.sql")
+        self.execute_query(SQL_DIR + "2_query_multi_join.sql")
 
     def query_window_cte(self):
-        
-        self.execute_query("3_query_window.sql")
+        self.execute_query(SQL_DIR + "3_query_window.sql")
 
     def query_meta(self):
-        
-        self.execute_query("4_query_meta.sql")
+        self.execute_query(SQL_DIR + "4_query_meta.sql")
 
     def func_scalar(self):
-        
-        self.execute_query("5_func_scalar.sql")
+        self.execute_query(SQL_DIR + "5_func_scalar.sql")
 
     def func_table(self):
-        
-        self.execute_query("6_func_table.sql")
+        self.execute_query(SQL_DIR + "6_func_table.sql")
 
     def procedure(self):
-        
-        self.execute_procedure("7_procedure.sql")
+        self.execute_procedure(SQL_DIR + "7_procedure.sql")
 
     def func_system(self):
-
-        self.execute_query("8_func_system.sql")
+        self.execute_query(SQL_DIR + "8_func_system.sql")
 
     def create_new_table(self):
-        
-        self.execute_procedure("9_create_table.sql")
+        self.execute_procedure(SQL_DIR + "9_create_table.sql")
 
     def insert_new_table(self):
-
-        self.execute_query("10_insert_new_table.sql")
+        self.execute_query(SQL_DIR + "10_insert_new_table.sql")
 
     def insert_server(self):
-
         faker = Faker()
 
         name = input("\nВведите название сервера: ")
@@ -150,21 +117,13 @@ class DataBase:
         print("Success")
 
 
-        
-
-
-
 def print_result(result):
-
     print("\n")
     
     for i in range(len(result)):
         for j in range (len(result[0])):
-
             print(result[i][j], "   ", end = "") 
-
         print("\n")
-
     print("\n\n")
 
 
@@ -179,24 +138,23 @@ def print_menu():
              \n\t8. Вызвать системную функцию \
              \n\t9. Создать таблицу в базе данных, соответствующую тематике БД \
              \n\t10. Выполнить вставку данных в созданную таблицу с использованием инструкции INSERT \
-             \n\t11. Защита: Добавить запись в сервер с вводомом \
+             \n\t11. Защита: Добавить запись в сервер с вводом \
            \n\n\t0. Выход\n\n")
 
 
-
 def main():
-    # test_faker()
-
     database = DataBase()
 
     option = -1
 
     while (option != 0):
-
         print_menu()
 
-        option = int(input("Выберите пункт меню: "))
-
+        try:
+            option = int(input("Выберите пункт меню: "))
+        except:
+            print("\nПовторите ввод\n")
+            continue
 
         if (option == 1):
             database.query_scalar()
@@ -222,8 +180,6 @@ def main():
             database.insert_server()
         else:
             print("\nПовторите ввод\n")
-
-
 
 
 if __name__ == "__main__":

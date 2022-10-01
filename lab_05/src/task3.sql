@@ -3,7 +3,7 @@
 
 drop table if exists player_json;
 
-create temp table player_json
+create temp table player_json 
 (
     info jsonb
 );
